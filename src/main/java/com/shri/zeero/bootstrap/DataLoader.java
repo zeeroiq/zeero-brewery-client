@@ -2,6 +2,7 @@ package com.shri.zeero.bootstrap;
 
 import com.shri.zeero.domain.Beer;
 import com.shri.zeero.repository.BeerRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +13,7 @@ import java.math.BigDecimal;
  */
 
 @Component
+@Slf4j
 public class DataLoader implements CommandLineRunner {
 
     private final BeerRepository repository;
@@ -41,7 +43,7 @@ public class DataLoader implements CommandLineRunner {
                     .beerStyle("LAGER")
                     .quantityToBrew(100)
                     .minOnHand(25)
-                    .upc(323212343132L)
+                    .upc(3232123431320L)
                     .price(new BigDecimal("130.00"))
                     .build());
             repository.save(Beer.builder()
@@ -52,6 +54,8 @@ public class DataLoader implements CommandLineRunner {
                     .upc(323212343132L)
                     .price(new BigDecimal("190.00"))
                     .build());
+
+            log.debug(">>>>> Number of beers in inventory: "+ repository.count());
         }
     }
 }
