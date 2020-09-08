@@ -1,0 +1,9 @@
+zeero:
+  brewery:
+    apihost: http://localhost:8080
+
+logging:
+  level:
+    org:
+      apache:
+        http: debug
