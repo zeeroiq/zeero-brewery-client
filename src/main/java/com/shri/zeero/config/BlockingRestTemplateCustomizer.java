@@ -16,29 +16,5 @@ import org.springframework.web.client.RestTemplate;
  */
 @Component
 public class BlockingRestTemplateCustomizer implements RestTemplateCustomizer {
-    @Override
-    public void customize(RestTemplate restTemplate) {
-        restTemplate.setRequestFactory(this.clientHttpRequestFactory());
-    }
-    // todo: replace hardcoded configuration properties to externalize properties
-    private ClientHttpRequestFactory clientHttpRequestFactory() {
 
-        PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager();
-        connectionManager.setMaxTotal(100);
-        connectionManager.setDefaultMaxPerRoute(20);
-
-        RequestConfig requestConfig = RequestConfig
-                .custom()
-                .setConnectionRequestTimeout(10000)
-                .setSocketTimeout(10000)
-                .build();
-        CloseableHttpClient httpClient = HttpClients
-                .custom()
-                .setConnectionManager(connectionManager)
-                .setKeepAliveStrategy(new DefaultConnectionKeepAliveStrategy())
-                .setDefaultRequestConfig(requestConfig)
-                .build();
-
-        return new HttpComponentsClientHttpRequestFactory(httpClient);
-    }
 }
