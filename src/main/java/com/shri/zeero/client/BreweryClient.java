@@ -29,4 +29,45 @@ public class BreweryClient {
     public void setApihost(String apihost) {
         this.apihost = apihost;
     }
+
+    // get request
+    public BeerDto getBeerById(UUID beerId) {
+        return restTemplate.getForObject(apihost + BEER_API_V1 + beerId.toString(), BeerDto.class);
+    }
+
+    // post request
+    public URI addBeer(BeerDto beer) {
+        return restTemplate.postForLocation(apihost + BEER_API_V1, beer);
+    }
+
+    // put request
+    public void updateBeer(UUID id, BeerDto beerDto) {
+        restTemplate.put(apihost + BEER_API_V1 + id.toString(), beerDto);
+    }
+
+    // delete request
+    public void deleteBeer(UUID id) {
+        restTemplate.delete(apihost + BEER_API_V1 + id.toString());
+    }
+
+
+    // get request
+    public CustomerDto getClientById(UUID clientId) {
+        return restTemplate.getForObject(apihost + CUSTOMER_API_V1 + clientId, CustomerDto.class);
+    }
+
+    // post request
+    public URI addCustomer(CustomerDto dto) {
+        return restTemplate.postForLocation(apihost + CUSTOMER_API_V1, dto);
+    }
+
+    // put request
+    public void updateCustomer(UUID id, CustomerDto dto) {
+        restTemplate.put(apihost + CUSTOMER_API_V1 + id.toString(), dto);
+    }
+
+    // delete request
+    public void deleteCustomer(UUID id) {
+        restTemplate.delete(apihost + CUSTOMER_API_V1 + id.toString());
+    }
 }
