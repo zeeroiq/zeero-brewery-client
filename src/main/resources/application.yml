@@ -1,8 +1,14 @@
 zeero:
   brewery:
     apihost: http://localhost:8080
+  maxTotalConnection: 100
+  defaultMaxTotalConnection: 20
+  connectionRequestTimeout: 10000
+  socketTimeout: 10000
 
 logging:
+  file:
+    name: Test.log
   level:
     org:
       apache:
